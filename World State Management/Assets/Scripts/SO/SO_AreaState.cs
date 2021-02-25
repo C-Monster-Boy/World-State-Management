@@ -10,7 +10,7 @@ using UnityEngine;
 public class SO_AreaState : ScriptableObject
 {
     public string areaName;
-    public WorldStates id_worldState;
+    public WorldStates[] id_acceptableWorldStateList;
     public AreaStates id_areaState;
 
     public GameObject prefabToLoad;

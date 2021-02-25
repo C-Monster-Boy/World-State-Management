@@ -30,10 +30,11 @@ public class WorldStateManager : MonoBehaviour
             TimeOfCreation = Time.time;
             worldStateManagerInstance = this;
             DontDestroyOnLoad(gameObject);
+            CurrentWorldState = currentWorldState;
+            AreaStateList = areaStateList;
         }
 
-        CurrentWorldState = currentWorldState;
-        AreaStateList = areaStateList;
+       
     }
    
     public static WorldStates GetCurrentWorldState()

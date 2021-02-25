@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4c8af40ae3be3642ae3518671c9c94d, type: 3}
-  m_Name: Area1_Start
+  m_Name: Area3_Start
   m_EditorClassIdentifier: 
-  areaName: Area1
-  id_worldState: 0
-  id_areaState: 0
-  prefabToLoad: {fileID: 649264555424226086, guid: b989ef525d7fc984b9d7c45843a27d34, type: 3}
+  areaName: Area3
+  id_acceptableWorldStateList: 000000000100000002000000
+  id_areaState: 5
+  prefabToLoad: {fileID: 6480978195886683299, guid: 5b6da6b0f757f474685d5245a951dec0, type: 3}

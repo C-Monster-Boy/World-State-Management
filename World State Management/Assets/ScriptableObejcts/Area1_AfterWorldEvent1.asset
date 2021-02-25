@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Area1_AfterWorldEvent1
   m_EditorClassIdentifier: 
   areaName: Area1
-  id_worldState: 1
+  id_acceptableWorldStateList: 01000000
   id_areaState: 1
   prefabToLoad: {fileID: 7856580772793703807, guid: e1966d7bb4a09cc4b83f5486cd864299, type: 3}

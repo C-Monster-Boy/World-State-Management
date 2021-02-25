@@ -15,7 +15,15 @@ public class AreaInitializer : MonoBehaviour
     void Start()
     {
         GameObject prefabToInstantiate = GetPrefabBasedOnState();
-        Instantiate(prefabToInstantiate);
+        if(prefabToInstantiate)
+        {
+            Instantiate(prefabToInstantiate);
+        }
+        else
+        {
+            print("No value recieved");
+        }
+        
     }
 
     private GameObject GetPrefabBasedOnState()
@@ -23,16 +31,33 @@ public class AreaInitializer : MonoBehaviour
         for(int i=0; i<possibleAreaStates.Length; i++)
         {
             bool isAreaNameSame = possibleAreaStates[i].areaName == currAreaName;
-            bool isCurrWorldStateSame = possibleAreaStates[i].id_worldState == WorldStateManager.GetCurrentWorldState();
             bool isCurrAreaStateSame = possibleAreaStates[i].id_areaState == WorldStateManager.GetCurrentAreaState(currAreaName);
+            bool isCurrWorldStateSame = IsCurrentWorldStateSame(possibleAreaStates[i]);
 
-            if(isAreaNameSame && isCurrWorldStateSame && isCurrAreaStateSame)
+            if (isAreaNameSame && isCurrWorldStateSame && isCurrAreaStateSame)
             {
                 return possibleAreaStates[i].prefabToLoad;
             }
         }
 
         return null;
+    }
+
+    private bool IsCurrentWorldStateSame(SO_AreaState areaState)
+    {
+        bool ans = false;
+        WorldStates currWorldState = WorldStateManager.GetCurrentWorldState();
+
+        foreach(WorldStates worldState in areaState.id_acceptableWorldStateList)
+        {
+            if(worldState == currWorldState)
+            {
+                ans = true;
+                break;
+            }
+        }
+
+        return ans;
     }
 
     
