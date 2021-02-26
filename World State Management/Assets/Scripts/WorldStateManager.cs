@@ -13,10 +13,13 @@ public class WorldStateManager : MonoBehaviour
 
     public WorldStates currentWorldState;
     public AreaStateMapper[] areaStateList;
+    public SO_WorldEvent[] worldEventList;
+
 
     public static WorldStates CurrentWorldState;
     public static AreaStateMapper[] AreaStateList;
-
+    public static SO_WorldEvent[] WorldEventList;
+    
 
 
     private void Awake()
@@ -30,8 +33,8 @@ public class WorldStateManager : MonoBehaviour
             TimeOfCreation = Time.time;
             worldStateManagerInstance = this;
             DontDestroyOnLoad(gameObject);
-            CurrentWorldState = currentWorldState;
-            AreaStateList = areaStateList;
+
+            CopyDataIntoStatics();
         }
 
        
@@ -73,6 +76,55 @@ public class WorldStateManager : MonoBehaviour
         }
     }
 
+    
+    public static void InvokeWorldEvent(string worldEventName)
+    {
+        SO_WorldEvent worldEventToInvoke = GetWorldEvent(worldEventName);
+
+        //Set new world state
+        SetCurrentWorldState(worldEventToInvoke.newWorldState);
+
+        //Invoke Area Events
+        InvokeAreaEventsRelatedToWorldEvent(worldEventToInvoke);
+
+    }
+
+    private static void InvokeAreaEventsRelatedToWorldEvent(SO_WorldEvent worldEventToInvoke)
+    {
+        AreaStateManager currLoadedArea = FindObjectOfType<AreaStateManager>();
+
+        foreach (AreaEventWithAreaName areaEvent in worldEventToInvoke.areaEventsToTrigger)
+        {
+            if (areaEvent.areaName == currLoadedArea.currAreaName)
+            {
+                currLoadedArea.InvokeAreaEvent(areaEvent.areaEvent);
+            }
+            else
+            {
+                SetCurrentAreaState(areaEvent.areaName, areaEvent.newAreaState);
+            }
+        }
+    }
+
+    private static SO_WorldEvent GetWorldEvent(string worldEventName)
+    {
+        for (int i = 0; i < WorldEventList.Length; i++)
+        {
+            if (WorldEventList[i].worldEventName == worldEventName)
+            {
+                return WorldEventList[i];
+            }
+        }
+        return null;
+    }
+
+    private void CopyDataIntoStatics()
+    {
+        CurrentWorldState = currentWorldState;
+        AreaStateList = areaStateList;
+        WorldEventList = worldEventList;
+    }
+
     private void DestroyNewerInstances()
     {
         WorldStateManager[] worldStateManagerList = FindObjectsOfType<WorldStateManager>();
@@ -97,6 +149,9 @@ public class WorldStateManager : MonoBehaviour
         print("Checked for destruction: " + TimeOfCreation);
     }
 }
+
+
+
 
 public enum WorldStates
 {

@@ -25,14 +25,16 @@ public class PlayerInteract : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (ray.collider.GetComponent<SmilieKiller>())
+                print(ray.collider.name);
+                if (ray.collider.GetComponent<AreaEventTrigger>())
                 {
-                    print("Found Smiles");
-                    ray.collider.GetComponent<SmilieKiller>().KillTheSmilie_Interact();
+                    ray.collider.GetComponent<AreaEventTrigger>().TriggerAreaEvent();
                 }
-            }
-               
-                
+                if (ray.collider.GetComponent<WorldEventTrigger>())
+                {
+                    ray.collider.GetComponent<WorldEventTrigger>().TriggerWorldEvent();
+                }
+            }      
            
         }
     }
