@@ -104,6 +104,8 @@ public class WorldStateManager : MonoBehaviour
                 SetCurrentAreaState(areaEvent.areaName, areaEvent.newAreaState);
             }
         }
+
+        print("Curr world state: " + CurrentWorldState + "\t");
     }
 
     private static SO_WorldEvent GetWorldEvent(string worldEventName)
@@ -127,26 +129,12 @@ public class WorldStateManager : MonoBehaviour
 
     private void DestroyNewerInstances()
     {
-        WorldStateManager[] worldStateManagerList = FindObjectsOfType<WorldStateManager>();
-
-        WorldStateManager oldest = worldStateManagerList[0];
-        for (int i = 1; i < worldStateManagerList.Length; i++)
+       if(this != worldStateManagerInstance)
         {
-            if (worldStateManagerList[i].TimeOfCreation < oldest.TimeOfCreation)
-            {
-                oldest = worldStateManagerList[i];
-            }
+            Destroy(this.gameObject);
         }
 
-        for (int i = 0; i < worldStateManagerList.Length; i++)
-        {
-            if (worldStateManagerList[i] != oldest)
-            {
-                Destroy(worldStateManagerList[i].gameObject);
-            }
-        }
-
-        print("Checked for destruction: " + TimeOfCreation);
+        print("Checked for destruction");
     }
 }
 

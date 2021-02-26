@@ -16,8 +16,8 @@ MonoBehaviour:
   newWorldState: 2
   areaEventsToTrigger:
   - areaName: Area1
-    newAreaState: 0
-    areaEvent: 
+    newAreaState: 2
+    areaEvent: --no event--
   - areaName: Area2
-    newAreaState: 0
-    areaEvent: 
+    newAreaState: 4
+    areaEvent: Kill 1 Smilie
