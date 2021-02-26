@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4c8af40ae3be3642ae3518671c9c94d, type: 3}
-  m_Name: Area2_Start
+  m_Script: {fileID: 11500000, guid: 0895af5f18a19264c97e88c9de1fad5f, type: 3}
+  m_Name: WorldEvent1
   m_EditorClassIdentifier: 
-  areaName: Area2
-  id_acceptableWorldStateList: 0000000001000000
-  id_areaState: 3
-  prefabToLoad: {fileID: 2691005874785007383, guid: db1830183cef58340a3eb65861beaaf7, type: 3}
+  worldEventName: WorldEvent1
+  newWorldState: 1
+  areaEventsToTrigger:
+  - areaName: Area1
+    newAreaState: 1
+    areaEvent: Kill 2 smilies
